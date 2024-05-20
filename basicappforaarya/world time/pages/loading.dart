@@ -1,5 +1,6 @@
-import 'package:basicappforaarya/services/world_time.dart';
 import 'package:flutter/material.dart';
+
+import '../services/world_time.dart';
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
