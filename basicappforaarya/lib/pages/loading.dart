@@ -16,7 +16,8 @@ class _LoadingState extends State<Loading> {
         WorldTime(location: 'india', flag: 'india.png', url: 'Asia/Kolkata');
     await instance.getTime();
     if (mounted) {
-      Navigator.pushNamed(context, '/home', arguments: {
+      // return;
+      Navigator.pushReplacementNamed(context, '/home', arguments: {
         'location': instance.location,
         'flag': instance.flag,
         'time': instance.time,
@@ -32,12 +33,18 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Text(timee),
+    setupWorldTime();
+    return const Scaffold(
+      backgroundColor: Colors.blueAccent,
+      body: Center(
+        child: SizedBox(
+          height: 100,
+          width: 100,
+          child: CircularProgressIndicator(
+            color: Colors.amber,
+          ),
+        ),
       ),
-    ));
+    );
   }
 }
