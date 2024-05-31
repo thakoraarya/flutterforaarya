@@ -1,5 +1,6 @@
 import 'package:basicappforaarya/pages/form.dart';
 import 'package:basicappforaarya/pages/loading.dart';
+import 'package:basicappforaarya/pages/preview.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
@@ -38,6 +39,7 @@ void main() => runApp(MaterialApp(
       routes: {
         '/': (context) => const Loading(),
         '/form': (context) => const FormWithValidation(),
+        '/preview': (context) => const UserPreview(),
 // '/preview': (context) => const preview(),
       },
     ));

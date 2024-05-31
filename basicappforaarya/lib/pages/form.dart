@@ -36,6 +36,20 @@ class NameInputFormatter extends TextInputFormatter {
   }
 }
 
+class AddressInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    String singleSpacedText = newValue.text.replaceAll(RegExp(r'\s+'), ' ');
+    return TextEditingValue(
+      text: singleSpacedText,
+      selection: newValue.selection,
+    );
+  }
+}
+
 class EmailInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -83,9 +97,9 @@ class _FormWithValidationState extends State<FormWithValidation> {
         title: Text(
           'Form with Validation',
           style: TextStyle(
-              fontSize: 14, color: Theme.of(context).colorScheme.onPrimary),
+              fontSize: 20, color: Theme.of(context).colorScheme.primary),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        // backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -163,7 +177,7 @@ class _FormWithValidationState extends State<FormWithValidation> {
                     maxLength: 10,
                     controller: inputMobile,
                     inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                     ],
                     keyboardType: TextInputType.number,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -193,14 +207,19 @@ class _FormWithValidationState extends State<FormWithValidation> {
                     height: 24,
                   ),
                   TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    minLines: 2,
+                    maxLines: 3,
+                    maxLength: 100,
                     controller: inputAddress,
+                    inputFormatters: [AddressInputFormatter()],
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     // autofocus: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "please enter some text";
-                      } else if (value.contains("@")) {
-                        return "please don't use '@'";
+                      } else if (value.length < 5 || value.length > 100) {
+                        return "Name should be from 5 to 50 characters";
                       }
                       return null;
                     },
@@ -218,6 +237,12 @@ class _FormWithValidationState extends State<FormWithValidation> {
                       Expanded(
                         child: OutlinedButton(
                             onPressed: () {
+                              TextObject textObject = TextObject(
+                                  inputName.text,
+                                  inputEmail.text,
+                                  inputMobile.text,
+                                  inputAddress.text);
+                              debugPrint(textObject.toString());
                               // Clear all the text fields
                               inputName.clear();
                               inputEmail.clear();
@@ -246,7 +271,14 @@ class _FormWithValidationState extends State<FormWithValidation> {
                                     inputEmail.text,
                                     inputMobile.text,
                                     inputAddress.text);
-                                debugPrint(textObject.toString());
+                                // debugPrint(textObject.toString());
+                                Navigator.pushNamed(context, '/preview',
+                                    arguments: {
+                                      'Name': textObject.name,
+                                      'Email': textObject.email,
+                                      'Mobile': textObject.mobile,
+                                      'Address': textObject.address,
+                                    });
                               }
                             },
                             child: Text(
