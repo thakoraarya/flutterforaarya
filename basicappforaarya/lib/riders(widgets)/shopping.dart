@@ -30,7 +30,7 @@ class _ShoppingState extends State<Shopping> {
                 // OutlinedButton(onPressed: () {}, child: Text("button"))),
                 Checkbox(
               onChanged: (newValue) => setState(
-                () => newValue = _value,
+                () => _value = newValue,
               ),
               value: _value,
             ),
