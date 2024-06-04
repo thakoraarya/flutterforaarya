@@ -16,7 +16,7 @@ class _LoadingState extends State<Loading> {
   }
 
   void splashTimer() async {
-    await Future.delayed(Duration(seconds: 3), () {
+    await Future.delayed(Duration(seconds: 1), () {
       setState(() {
         ++seconds;
       });
