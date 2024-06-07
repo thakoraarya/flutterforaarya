@@ -16,11 +16,12 @@ class _LoadingState extends State<Loading> {
   }
 
   void splashTimer() async {
-    await Future.delayed(Duration(seconds: 1), () {
+    await Future.delayed(Duration(seconds: 5), () {
       setState(() {
         ++seconds;
       });
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, 'Home');
+      // Navigator.pop(context);
     });
   }
 
@@ -34,44 +35,53 @@ class _LoadingState extends State<Loading> {
         : Colors.black.withOpacity(0.2);
 
     TextStyle? textColor = widget.isLoadingSplash
-        ? Theme.of(context)
-            .textTheme
-            .headlineSmall
-            ?.copyWith(color: Theme.of(context).colorScheme.primary)
-        : Theme.of(context)
-            .textTheme
-            .headlineSmall
-            ?.copyWith(color: Theme.of(context).colorScheme.onPrimary);
+        ? Theme
+        .of(context)
+        .textTheme
+        .headlineSmall
+        ?.copyWith(color: Theme
+        .of(context)
+        .colorScheme
+        .primary)
+        : Theme
+        .of(context)
+        .textTheme
+        .headlineSmall
+        ?.copyWith(color: Theme
+        .of(context)
+        .colorScheme
+        .onPrimary);
 
     return Scaffold(
       backgroundColor: bg,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            widget.isLoadingSplash
-                ? ClipRRect(
-                    borderRadius: BorderRadius.circular(500),
-                    child: Image(
-                      width: imageSize,
-                      height: imageSize,
-                      image: NetworkImage(
-                          'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84a78cdbb5a05a92e6cfd93fe0'),
-                    ),
-                  )
-                : CircularProgressIndicator(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-            SizedBox(
-              height: 20,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+          widget.isLoadingSplash
+          ? ClipRRect(
+          borderRadius: BorderRadius.circular(500),
+          child: Image(
+            width: imageSize,
+            height: imageSize,
+            image: NetworkImage(
+                'https://creatorspace.imgix.net/users/cllwgy7s001a1mx01och5v45b/qDIkOMIqvxyXHckS-A1_0000.png?w=750&h=750'),
+              // 'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84a78cdbb5a05a92e6cfd93fe0'),
             ),
-            Text(
-              'Loading... $seconds',
-              style: textColor,
-            ),
-          ],
-        ),
-      ),
+          )
+              : CircularProgressIndicator(
+          color: Theme.of(context).colorScheme.primary,
+    ),
+    SizedBox(
+    height: 20,
+    ),
+    Text(
+    'Loading... $seconds',
+    style: textColor,
+    ),
+    ],
+    ),
+    ),
     );
   }
 }

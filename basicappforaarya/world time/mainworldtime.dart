@@ -8,7 +8,7 @@ void main() => runApp(MaterialApp(
       initialRoute: '/',
       routes: {
         '/': (context) => const Loading(),
-        '/home': (context) => const Home(),
+        'Home': (context) => const Home(),
         '/location': (context) => const ChooseLocation(),
       },
     ));

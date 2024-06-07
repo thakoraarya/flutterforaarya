@@ -1,32 +1,81 @@
 import 'package:flutter/material.dart';
 
-class BottomNavigationBar extends StatelessWidget {
-  final int CurrentIndex;
-  final Function(int) onTap;
+class BottomNavBar extends StatefulWidget {
+  BottomNavBar(
+      {Key? key,
+      required int this.currentPageIndex,
+      required this.selectedDest})
+      : super(key: key);
 
-  const BottomNavigationBar(
-      {super.key,
-      required this.CurrentIndex,
-      required this.onTap,
-      required List<BottomNavigationBarItem> Items});
+  int currentPageIndex;
+  void Function(int) selectedDest;
 
   @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        CurrentIndex: CurrentIndex,
-        onTap: onTap,
-        Items: [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
-          BottomNavigationBarItem(
-              icon: Badge(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                child: Icon(
-                  Icons.shopping_cart_outlined,
-                ),
-              ),
-              label: 'Cart'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined), label: 'data'),
-        ]);
+    // return Scaffold(
+    //   bottomNavigationBar: NavigationBar(
+    //     onDestinationSelected: widget.selectedDest,
+    //     indicatorColor: Theme.of(context).colorScheme.primary,
+    //     selectedIndex: widget.currentPageIndex,
+    //     destinations: <Widget>[
+    //       NavigationDestination(
+    //           icon: Icon(Icons.storefront_outlined),
+    //           selectedIcon: Icon(
+    //             Icons.storefront_rounded,
+    //             color: Theme.of(context).colorScheme.onPrimary,
+    //           ),
+    //           label: 'Shop'),
+    //       NavigationDestination(
+    //           icon: Icon(Icons.shopping_cart_outlined),
+    //           selectedIcon: Icon(
+    //             Icons.shopping_cart_rounded,
+    //             color: Theme.of(context).colorScheme.onPrimary,
+    //           ),
+    //           label: 'Cart'),
+    //       NavigationDestination(
+    //           icon: Icon(Icons.person_outlined),
+    //           selectedIcon: Icon(
+    //             Icons.person_rounded,
+    //             color: Theme.of(context).colorScheme.onPrimary,
+    //           ),
+    //           label: 'Profile'),
+    //     ],
+    //   ),
+    // );
+
+    return NavigationBar(
+      onDestinationSelected: widget.selectedDest,
+      indicatorColor: Theme.of(context).colorScheme.primary,
+      selectedIndex: widget.currentPageIndex,
+      destinations: <Widget>[
+        NavigationDestination(
+            tooltip: 'Shop',
+            icon: Icon(Icons.storefront_outlined),
+            selectedIcon: Icon(
+              Icons.storefront_rounded,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            label: 'Shop'),
+        NavigationDestination(
+            icon: Icon(Icons.shopping_cart_outlined),
+            selectedIcon: Icon(
+              Icons.shopping_cart_rounded,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            label: 'Cart'),
+        NavigationDestination(
+            icon: Icon(Icons.person_outlined),
+            selectedIcon: Icon(
+              Icons.person_rounded,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            label: 'Profile'),
+      ],
+    );
   }
 }

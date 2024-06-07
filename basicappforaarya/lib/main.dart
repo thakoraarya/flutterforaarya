@@ -1,4 +1,5 @@
 import 'package:basicappforaarya/riders(widgets)/loading.dart';
+import 'package:basicappforaarya/riders(widgets)/productDetails.dart';
 import 'package:basicappforaarya/riders(widgets)/shopping.dart';
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ void main() => runApp(
       // providers: [],
       // child:
       MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF006600)),
           textTheme: const TextTheme(
@@ -66,15 +68,19 @@ void main() => runApp(
           ),
         ),
         initialRoute: '/',
+        // initialRoute: 'Details',
+        // home: Loading(
+        //   isLoadingSplash: true,
+        // ),
         routes: {
           '/': (context) => const Loading(
                 isLoadingSplash: true,
               ),
-          '/home': (context) => const Shopping(),
+          'Home': (context) => const Shopping(),
+          'Details': (context) => const ProductDetails(),
           // '/preview': (context) => const UserPreview(),
           // '/preview': (context) => const preview(),
         },
       ),
-
 // )
     );
