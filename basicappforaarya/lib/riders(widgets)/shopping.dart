@@ -1,7 +1,9 @@
+import 'package:basicappforaarya/riders(widgets)/cart.dart';
+import 'package:basicappforaarya/riders(widgets)/shop.dart';
 import 'package:basicappforaarya/services/apiServices.dart';
 import 'package:flutter/material.dart';
+
 import 'BottomNavigationBar.dart';
-import 'listItem.dart';
 
 class Shopping extends StatefulWidget {
   const Shopping({super.key});
@@ -47,27 +49,8 @@ class _ShoppingState extends State<Shopping> {
       body: PageView(
         controller: _pageController,
         children: <Widget>[
-          ListView.separated(
-            separatorBuilder: (BuildContext context, int index) => SizedBox(
-              height: 8,
-            ),
-            itemCount: _ProductListRes?.length ?? 0,
-            itemBuilder: (BuildContext context, int index) {
-              var prods = _ProductListRes![index];
-              return ListItem(
-                onClick: () {
-                  print(prods.id);
-                  // Navigator.pushNamed(context, 'productDetails');
-                },
-                ImageUrl: prods.image ?? 'https://dummyjson.com/image/100',
-                ProductName: prods.title ?? 'Data not Found',
-                ProductPrice: prods.price ?? 'Data not Found',
-              );
-            },
-          ),
-          Container(
-            color: Theme.of(context).colorScheme.primaryContainer,
-          ),
+          ShopView(),
+          cartView(),
           Container(
             color: Theme.of(context).colorScheme.tertiaryContainer,
           ),

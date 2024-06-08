@@ -69,17 +69,12 @@ void main() => runApp(
         ),
         initialRoute: '/',
         // initialRoute: 'Details',
-        // home: Loading(
-        //   isLoadingSplash: true,
-        // ),
         routes: {
           '/': (context) => const Loading(
                 isLoadingSplash: true,
               ),
           'Home': (context) => const Shopping(),
           'Details': (context) => const ProductDetails(),
-          // '/preview': (context) => const UserPreview(),
-          // '/preview': (context) => const preview(),
         },
       ),
 // )
