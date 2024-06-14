@@ -33,8 +33,8 @@ class _ShoppingState extends State<Shopping> {
       body: PageView(
         controller: _pageController,
         children: <Widget>[
-          ShopView(),
           cartView(),
+          ShopView(),
           Container(
             color: Theme.of(context).colorScheme.tertiaryContainer,
           ),

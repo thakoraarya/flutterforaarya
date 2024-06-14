@@ -12,11 +12,11 @@ class _UserPreviewState extends State<UserPreview> {
 
   @override
   Widget build(BuildContext context) {
-    final routeSettings = ModalRoute.of(context)?.settings;
-    if (routeSettings != null && routeSettings.arguments is Map) {
-      Data = routeSettings.arguments as Map;
-      debugPrint(Data.toString());
-    }
+    // final routeSettings = ModalRoute.of(context)?.settings;
+    // if (routeSettings != null && routeSettings.arguments is Map) {
+    //   Data = routeSettings.arguments as Map;
+    // debugPrint(Data.toString());
+    // }
     return Scaffold(
       appBar: AppBar(
         actions: [

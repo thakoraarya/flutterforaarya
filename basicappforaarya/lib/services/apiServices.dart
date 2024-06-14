@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:basicappforaarya/models/cartData.dart';
 import 'package:basicappforaarya/models/prodDetails.dart';
 import 'package:basicappforaarya/models/productList.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,18 @@ class ApiService {
     if (response.statusCode == 200) {
       var details = res;
       return ProdDetails.fromJson(details);
+    } else {
+      debugPrint('no data found');
+      throw Exception('Faild to Load Data');
+    }
+  }
+
+  Future<CartData> getCartData(int Cid) async {
+    final url = Uri.parse('$baseUrl/carts/${Cid}');
+    final Response = await http.get(url);
+    var resData = jsonDecode(Response.body);
+    if (Response.statusCode == 200) {
+      return CartData.fromJson(resData);
     } else {
       debugPrint('no data found');
       throw Exception('Faild to Load Data');

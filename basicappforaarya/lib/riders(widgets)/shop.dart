@@ -38,7 +38,7 @@ class _ShopViewState extends State<ShopView> {
           var prods = _shopProductListRes![index];
           return ListItem(
             onClick: () {
-              print(prods.id);
+              // print(prods.id);
               Navigator.pushNamed(context, 'Details', arguments: prods.id);
             },
             ImageUrl: prods.image ?? 'https://dummyjson.com/image/100',

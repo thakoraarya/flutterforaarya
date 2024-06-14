@@ -1,6 +1,8 @@
-import 'package:basicappforaarya/riders(widgets)/listItem.dart';
+import 'package:basicappforaarya/models/cartData.dart';
 import 'package:basicappforaarya/services/apiServices.dart';
 import 'package:flutter/material.dart';
+
+import '../models/prodDetails.dart';
 
 class cartView extends StatefulWidget {
   const cartView({super.key});
@@ -10,43 +12,43 @@ class cartView extends StatefulWidget {
 }
 
 class _cartViewState extends State<cartView> {
-  List<dynamic>? _cartProductListRes;
+  CartData? _cartProductRes;
+
+  // List<dynamic>? _CartListRes;
+  ProdDetails? prodDetails;
 
   @override
   void initState() {
-    LoadCart();
+    LoadCart(1);
     super.initState();
   }
 
-  void LoadCart() async {
+  void LoadCart(int Cid) async {
     ApiService apiService = ApiService();
-    List<dynamic> products = await apiService.getProducts();
+    CartData cartDataRes = await apiService.getCartData(Cid);
+    _cartProductRes = cartDataRes;
+    _cartProductRes!.products.map((p) => loadDetails(p.productId));
+    print(_cartProductRes.toString());
+  }
+
+  Future<dynamic> loadDetails(int Pid) async {
+    ApiService apiService = ApiService();
+    ProdDetails res = await apiService.getProductDetails(Pid);
     setState(() {
-      _cartProductListRes = products;
+      prodDetails = res;
     });
+    print(prodDetails);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) => SizedBox(
-          height: 8,
-        ),
-        itemCount: _cartProductListRes?.length ?? 0,
-        itemBuilder: (BuildContext context, int index) {
-          var prods = _cartProductListRes![index];
-          return ListItem(
-            onClick: () {
-              print(prods.id);
-              Navigator.pushNamed(context, 'Details', arguments: prods.id);
-            },
-            ImageUrl: prods.image ?? 'https://dummyjson.com/image/100',
-            ProductName: prods.title ?? 'Data not Found',
-            ProductPrice: prods.price ?? 'Data not Found',
-          );
-        },
+        body: Center(
+      child: Column(
+        children: [
+          Text(_cartProductRes?.date ?? "date not found"),
+        ],
       ),
-    );
+    ));
   }
 }

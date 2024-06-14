@@ -11,7 +11,7 @@ void main() => runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF006600)),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0166FF)),
           textTheme: const TextTheme(
             displayLarge: TextStyle(
                 fontSize: 96.0,

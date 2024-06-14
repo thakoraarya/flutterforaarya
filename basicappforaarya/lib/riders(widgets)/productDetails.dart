@@ -22,10 +22,10 @@ class _ProductDetailsState extends State<ProductDetails> {
     super.didChangeDependencies();
 
     final routeSettings = ModalRoute.of(context)?.settings;
-    print(routeSettings);
+    // print(routeSettings);
     if (routeSettings != null && routeSettings.arguments is int) {
       int pid = routeSettings.arguments as int;
-      print(pid);
+      // print(pid);
       loadDetails(pid);
     }
   }
@@ -54,17 +54,30 @@ class _ProductDetailsState extends State<ProductDetails> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          // backgroundColor: Color(0xFFFFD83F),
-          title: Text(prodDetails?.title ?? 'product Details'),
-          actions: [
-            Icon(Icons.shopping_cart),
-            SizedBox.fromSize(
-              size: Size.fromWidth(8),
+          backgroundColor: Colors.transparent,
+          // title: Text(prodDetails?.title ?? 'product Details'),
+          bottom: PreferredSize(
+            preferredSize: Size.fromRadius(50),
+            child: Container(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: Text(
+                  prodDetails?.title ?? 'product Details',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
             ),
-            Icon(Icons.favorite_border),
-            SizedBox.fromSize(
-              size: Size.fromWidth(16),
-            )
+          ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Icon(Icons.shopping_cart),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Icon(Icons.favorite_border),
+            ),
           ],
           leading: IconButton(
             onPressed: () {
@@ -179,7 +192,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Expanded(
                   child: FilledButton(
                     onPressed: () {},
-                    child: Text('Buy Now'),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(Icons.shopping_cart_outlined),
+                          Text('Add to Cart'),
+                        ]),
                   ),
                 ),
               ],
