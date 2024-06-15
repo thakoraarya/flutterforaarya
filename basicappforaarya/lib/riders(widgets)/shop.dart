@@ -44,6 +44,8 @@ class _ShopViewState extends State<ShopView> {
             ImageUrl: prods.image ?? 'https://dummyjson.com/image/100',
             ProductName: prods.title ?? 'Data not Found',
             ProductPrice: prods.price ?? 'Data not Found',
+            ProductRate: prods.rating?.rate.toString() ?? 'Data not Found',
+            ProductPPL: prods.rating?.count.toString() ?? 'Data not Found',
           );
         },
       ),

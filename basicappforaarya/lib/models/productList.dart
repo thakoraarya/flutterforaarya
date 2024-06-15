@@ -23,8 +23,8 @@ class ProdList {
     description = json['description'];
     category = json['category'];
     image = json['image'];
-    // rating =
-    //     json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
+    rating =
+        json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -48,9 +48,11 @@ class Rating {
 
   Rating({this.rate, this.count});
 
-  Rating.fromJson(Map<String, dynamic> json) {
-    rate = json['rate'];
-    count = json['count'];
+  factory Rating.fromJson(Map<String, dynamic> json) {
+    return Rating(
+      rate: json['rate'].toDouble(),
+      count: json['count'],
+    );
   }
 
   Map<String, dynamic> toJson() {

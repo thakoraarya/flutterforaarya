@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 class ApiService {
   static const String baseUrl = 'https://fakestoreapi.com';
 
-  Future<List<dynamic>> getProducts() async {
+  Future<List<ProdList>> getProducts() async {
     final url = Uri.parse('$baseUrl/products');
     final response = await http.get(url);
     var res = jsonDecode(response.body);

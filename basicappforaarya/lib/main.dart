@@ -1,14 +1,16 @@
+import 'package:basicappforaarya/providers/ProductsProvider.dart';
 import 'package:basicappforaarya/riders(widgets)/loading.dart';
 import 'package:basicappforaarya/riders(widgets)/productDetails.dart';
 import 'package:basicappforaarya/riders(widgets)/shopping.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
 
-void main() => runApp(
-      // MultiProvider(
-      // providers: [],
-      // child:
-      MaterialApp(
+void main() => runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Productsprovider()),
+      ],
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0166FF)),
@@ -68,6 +70,7 @@ void main() => runApp(
           ),
         ),
         initialRoute: '/',
+        home: Shopping(),
         // initialRoute: 'Details',
         routes: {
           '/': (context) => const Loading(
@@ -77,5 +80,4 @@ void main() => runApp(
           'Details': (context) => const ProductDetails(),
         },
       ),
-// )
-    );
+    ));

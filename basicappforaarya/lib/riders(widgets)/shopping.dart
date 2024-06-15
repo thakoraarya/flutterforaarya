@@ -13,6 +13,7 @@ class Shopping extends StatefulWidget {
 
 class _ShoppingState extends State<Shopping> {
   int currentIndex = 0;
+  String? currentPageName;
 
   final PageController _pageController = PageController();
 
@@ -24,22 +25,23 @@ class _ShoppingState extends State<Shopping> {
 
   @override
   Widget build(BuildContext context) {
-    // String? currentPageName = ModalRoute.of(context)!.settings.name;
+    List<String> pageNames = ['Cart ', 'Shop ', 'Profile'];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Shopping App'),
+        title: Text(currentPageName ?? 'Shopping App'),
       ),
       body: PageView(
         controller: _pageController,
         children: <Widget>[
-          cartView(),
           ShopView(),
+          cartView(),
           Container(
             color: Theme.of(context).colorScheme.tertiaryContainer,
           ),
         ],
         onPageChanged: (int index) {
+          currentPageName = pageNames[index];
           setState(() {
             currentIndex = index;
           });

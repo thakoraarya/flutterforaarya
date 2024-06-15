@@ -38,4 +38,9 @@ class Product {
       quantity: json['quantity'],
     );
   }
+
+  @override
+  String toString() {
+    return 'CartProduct { productId: $productId, quantity: $quantity }';
+  }
 }
