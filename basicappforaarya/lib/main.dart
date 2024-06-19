@@ -1,4 +1,7 @@
-import 'package:basicappforaarya/providers/ProductsProvider.dart';
+import 'package:basicappforaarya/providers/cartProvider.dart';
+import 'package:basicappforaarya/providers/productDetailsProvider.dart';
+import 'package:basicappforaarya/providers/productsProvider.dart';
+import 'package:basicappforaarya/providers/userProvider.dart';
 import 'package:basicappforaarya/riders(widgets)/loading.dart';
 import 'package:basicappforaarya/riders(widgets)/productDetails.dart';
 import 'package:basicappforaarya/riders(widgets)/shopping.dart';
@@ -8,7 +11,10 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Productsprovider()),
+        ChangeNotifierProvider(create: (context) => ProductsProvider()),
+        ChangeNotifierProvider(create: (context) => ProductDetailsProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -70,7 +76,7 @@ void main() => runApp(MultiProvider(
           ),
         ),
         initialRoute: '/',
-        home: Shopping(),
+        // home: Shopping(),
         // initialRoute: 'Details',
         routes: {
           '/': (context) => const Loading(

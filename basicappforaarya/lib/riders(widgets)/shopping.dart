@@ -1,5 +1,6 @@
 import 'package:basicappforaarya/riders(widgets)/cart.dart';
 import 'package:basicappforaarya/riders(widgets)/shop.dart';
+import 'package:basicappforaarya/riders(widgets)/userDetailsScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'BottomNavigationBar.dart';
@@ -25,7 +26,7 @@ class _ShoppingState extends State<Shopping> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> pageNames = ['Cart ', 'Shop ', 'Profile'];
+    List<String> pageNames = ['Shop ', 'Cart ', 'Profile'];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -36,9 +37,7 @@ class _ShoppingState extends State<Shopping> {
         children: <Widget>[
           ShopView(),
           cartView(),
-          Container(
-            color: Theme.of(context).colorScheme.tertiaryContainer,
-          ),
+          UserDetailsScreen(),
         ],
         onPageChanged: (int index) {
           currentPageName = pageNames[index];

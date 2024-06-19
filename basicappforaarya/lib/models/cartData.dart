@@ -1,39 +1,38 @@
+import 'package:basicappforaarya/models/prodDetails.dart';
+
 class CartData {
-  int id;
-  int userId;
   String date;
-  List<Product> products;
+  final List<productsInCart> productsListInCart;
 
   CartData({
-    required this.id,
-    required this.userId,
+    required this.productsListInCart,
     required this.date,
-    required this.products,
   });
 
   factory CartData.fromJson(Map<String, dynamic> json) {
     var productList = json['products'] as List;
-    List<Product> prodCartList =
-        productList.map((i) => Product.fromJson(i)).toList();
+    List<productsInCart> prodCartList =
+        productList.map((i) => productsInCart.fromJson(i)).toList();
     return CartData(
-        date: json['date'],
-        id: json['id'],
-        userId: json['userId'],
-        products: prodCartList);
+      date: json['date'],
+      productsListInCart: prodCartList,
+    );
   }
 }
 
-class Product {
+class productsInCart {
   int productId;
   int quantity;
+  ProdDetails? productDetailList;
 
-  Product({
+  productsInCart({
     required this.productId,
     required this.quantity,
+    this.productDetailList,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
+  factory productsInCart.fromJson(Map<String, dynamic> json) {
+    return productsInCart(
       productId: json['productId'],
       quantity: json['quantity'],
     );

@@ -1,6 +1,7 @@
+import 'package:basicappforaarya/providers/productsProvider.dart';
 import 'package:basicappforaarya/riders(widgets)/listItem.dart';
-import 'package:basicappforaarya/services/apiServices.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ShopView extends StatefulWidget {
   const ShopView({super.key});
@@ -10,45 +11,54 @@ class ShopView extends StatefulWidget {
 }
 
 class _ShopViewState extends State<ShopView> {
-  List<dynamic>? _shopProductListRes;
-
   @override
   void initState() {
-    LoadShop();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ProductsProvider>(context, listen: false).fetchProducts();
+    });
   }
 
-  void LoadShop() async {
-    ApiService apiService = ApiService();
-    List<dynamic> products = await apiService.getProducts();
-    setState(() {
-      _shopProductListRes = products;
-    });
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) => SizedBox(
-          height: 8,
-        ),
-        itemCount: _shopProductListRes?.length ?? 0,
-        itemBuilder: (BuildContext context, int index) {
-          var prods = _shopProductListRes![index];
-          return ListItem(
-            onClick: () {
-              // print(prods.id);
-              Navigator.pushNamed(context, 'Details', arguments: prods.id);
-            },
-            ImageUrl: prods.image ?? 'https://dummyjson.com/image/100',
-            ProductName: prods.title ?? 'Data not Found',
-            ProductPrice: prods.price ?? 'Data not Found',
-            ProductRate: prods.rating?.rate.toString() ?? 'Data not Found',
-            ProductPPL: prods.rating?.count.toString() ?? 'Data not Found',
+      body: Consumer<ProductsProvider>(builder:
+          (BuildContext context, ProductsProvider value, Widget? child) {
+        if (value.isLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        },
-      ),
+        }
+        if (value.products!.isEmpty) {
+          return Center(
+            child: Text('no products'),
+          );
+        }
+        return ListView.separated(
+          separatorBuilder: (BuildContext context, int index) => SizedBox(
+            height: 8,
+          ),
+          itemCount: value.products?.length ?? 0,
+          itemBuilder: (BuildContext context, int index) {
+            var prods = value.products![index];
+            return ListItem(
+              onClick: () {
+                Navigator.pushNamed(context, 'Details', arguments: prods.id);
+              },
+              ImageUrl: prods.image ?? 'https://dummyjson.com/image/100',
+              ProductName: prods.title ?? 'Data not Found',
+              ProductPrice: prods.price ?? 'Data not Found',
+              ProductRate: prods.rating?.rate.toString() ?? 'Data not Found',
+              ProductPPL: prods.rating?.count.toString() ?? 'Data not Found',
+            );
+          },
+        );
+      }),
     );
   }
 }

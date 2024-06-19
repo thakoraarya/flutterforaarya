@@ -22,7 +22,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     super.didChangeDependencies();
 
     final routeSettings = ModalRoute.of(context)?.settings;
-    // print(routeSettings);
+    // Print(routeSettings);
     if (routeSettings != null && routeSettings.arguments is int) {
       int pid = routeSettings.arguments as int;
       // print(pid);

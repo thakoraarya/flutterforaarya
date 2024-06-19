@@ -15,7 +15,7 @@ class _UserPreviewState extends State<UserPreview> {
     // final routeSettings = ModalRoute.of(context)?.settings;
     // if (routeSettings != null && routeSettings.arguments is Map) {
     //   Data = routeSettings.arguments as Map;
-    // debugPrint(Data.toString());
+    // print(Data.toString());
     // }
     return Scaffold(
       appBar: AppBar(

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:basicappforaarya/models/cartData.dart';
 import 'package:basicappforaarya/models/prodDetails.dart';
 import 'package:basicappforaarya/models/productList.dart';
-import 'package:flutter/material.dart';
+import 'package:basicappforaarya/models/userModel.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -18,7 +18,7 @@ class ApiService {
       // print(products[0].price.toString());
       return products;
     } else {
-      debugPrint('no data found');
+      print('no data found');
       return [];
     }
   }
@@ -31,8 +31,8 @@ class ApiService {
       var details = res;
       return ProdDetails.fromJson(details);
     } else {
-      debugPrint('no data found');
-      throw Exception('Faild to Load Data');
+      print('no data found');
+      throw Exception('Failed to Load Data');
     }
   }
 
@@ -43,8 +43,21 @@ class ApiService {
     if (Response.statusCode == 200) {
       return CartData.fromJson(resData);
     } else {
-      debugPrint('no data found');
-      throw Exception('Faild to Load Data');
+      print('no data found');
+      throw Exception('Failed to Load Data');
+    }
+  }
+
+  Future<dynamic> getUserProfile(int id) async {
+    final url = Uri.parse('$baseUrl/users/${id}');
+    final response = await http.get(url);
+    var res = jsonDecode(response.body);
+    if (response.statusCode == 200 && res != null) {
+      Map<String, dynamic> details = res;
+      return UserModel.fromJson(details);
+    } else {
+      print('no data found');
+      throw Exception('Failed to Load Data');
     }
   }
 }

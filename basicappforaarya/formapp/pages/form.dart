@@ -66,7 +66,7 @@ class EmailInputFormatter extends TextInputFormatter {
 class _FormWithValidationState extends State<FormWithValidation> {
   final _formKey = GlobalKey<FormState>();
 
-  void onPressed() => {debugPrint("Lll")};
+  void onPressed() => {print("Lll")};
   final inputName = TextEditingController();
   final inputEmail = TextEditingController();
   final inputMobile = TextEditingController();
@@ -127,7 +127,7 @@ class _FormWithValidationState extends State<FormWithValidation> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     // autofocus: true,
                     onChanged: (value) {
-                      debugPrint(value.length.toString());
+                      print(value.length.toString());
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -242,7 +242,7 @@ class _FormWithValidationState extends State<FormWithValidation> {
                                   inputEmail.text,
                                   inputMobile.text,
                                   inputAddress.text);
-                              debugPrint(textObject.toString());
+                              print(textObject.toString());
                               // Clear all the text fields
                               inputName.clear();
                               inputEmail.clear();
@@ -271,7 +271,7 @@ class _FormWithValidationState extends State<FormWithValidation> {
                                     inputEmail.text,
                                     inputMobile.text,
                                     inputAddress.text);
-                                // debugPrint(textObject.toString());
+                                // print(textObject.toString());
                                 Navigator.pushNamed(context, '/preview',
                                     arguments: {
                                       'Name': textObject.name,
